@@ -65,5 +65,11 @@ ipc.on('check-for-updates', async function (event, data) {
   event.returnValue = response;
 });
 
+ipc.on('download-update', async function (event, data) {
+  let response = await autoUpdater.checkForUpdatesAndNotify();
+  event.returnValue = response;
+});
+
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
