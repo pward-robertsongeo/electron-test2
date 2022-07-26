@@ -66,8 +66,8 @@ ipc.on('check-for-updates', async function (event, data) {
 });
 
 ipc.on('download-update', async function (event, data) {
-  let response = await autoUpdater.checkForUpdatesAndNotify();
-  event.returnValue = response;
+  let response = await autoUpdater.downloadUpdate();
+  event.returnValue = "got to here";
 });
 
 
