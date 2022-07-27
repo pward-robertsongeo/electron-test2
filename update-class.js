@@ -24,5 +24,5 @@ class Updater {
 async function testUpdate() {
     let update = new Updater();
     await update.checkForUpdate();
-    // await update.downloadUpdate();
+    await update.downloadUpdate();
 }
