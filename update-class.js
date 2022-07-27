@@ -8,21 +8,21 @@ class Updater {
         
     }
 
-    checkForUpdate() {
+    async checkForUpdate() {
         if(this.ipc == null) return;
-        let response = this.ipc.sendSync('check-for-updates', "hello");
+        let response = await this.ipc.invoke('check-for-updates');
         console.log(response)
     }
 
-    downloadUpdate() {
+    async downloadUpdate() {
         if(this.ipc == null) return;
-        let response = this.ipc.sendSync('download-update', "hello");
-        console.log(response)
+        let response = await this.ipc.invoke('download-update');
+        await this.ipc.invoke('restart-app');
     }
 }
 
 async function testUpdate() {
     let update = new Updater();
-    update.checkForUpdate();
-    update.downloadUpdate();
+    await update.checkForUpdate();
+    // await update.downloadUpdate();
 }

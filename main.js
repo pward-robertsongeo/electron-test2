@@ -54,21 +54,19 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 })
 
-app.on('check-for-Updates', async function (event, data) {
-  // let response = await autoUpdater.checkForUpdates();
-  // event.reply("update-response", "adsadas");
-  event.returnValue = "pong"
-});
-
-ipc.on('check-for-updates', async function (event, data) {
+ipc.handle('check-for-updates', async function (event, data) {
   let response = await autoUpdater.checkForUpdates();
-  event.returnValue = response;
+  return response;
 });
 
-ipc.on('download-update', async function (event, data) {
+ipc.handle('download-update', async function (event, data) {
   let response = await autoUpdater.downloadUpdate();
-  event.returnValue = "got to here";
+  return response;
 });
+
+ipc.handle('restart-app', function () {
+  autoUpdater.quitAndInstall();
+})
 
 
 // In this file you can include the rest of your app's specific main process
